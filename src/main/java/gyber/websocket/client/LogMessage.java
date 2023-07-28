@@ -25,7 +25,7 @@ public class LogMessage {
                 System.out.print(chars[x]);  // Печатает один символ в секунду
 
                 x++;
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }
 
             System.out.println();
@@ -54,7 +54,7 @@ public class LogMessage {
                 System.out.print(chars[x]);  // Печатает один символ в секунду
 
                 x++;
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }
 
             System.out.println();
