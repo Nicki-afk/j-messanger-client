@@ -23,8 +23,6 @@ public class ClientEndpointClass {
 
         this.session = session;
         System.out.println("Connected! ");
-
-        //session.setMaxIdleTimeout(10000);
         
 
         try {
