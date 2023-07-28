@@ -23,63 +23,30 @@ public class ClientEndpointClass {
 
     @OnOpen
     public void onOpen(Session session) {
-
         this.session = session;
-
-
-
-    
-
         LogMessage.logClientMessage("Connect to server successful !!");
         logInByUser();
         LogMessage.logClientMessage("Your logined in server by username : " + this.username);
-        
-
-          //new Thread(this::writeAMessage).start();
-
-        try {
-
-        
-
-         
-
-            // while(connect){
-
-            //     Thread.sleep(2000);
-            //     writeAMessage();
-                
-
-            // }
-            writeAMessage();
+        writeAMessage();
 
     
-           
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     @OnMessage
     public void onMessage(String message) {
-        try{
-
-         LogMessage.logMessage(message);
-         writeAMessage();
+        LogMessage.logMessage(message);
+        writeAMessage();
 
 
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
 
 
     public void logInByUser(){
-
         LogMessage.logClientMessage("Write your username to connect : ");
         System.out.print(": ");
         this.username = new Scanner(System.in).nextLine();
+
+        // add a check
         
         
     }
@@ -123,9 +90,6 @@ public class ClientEndpointClass {
 
 
             }
-
-
-          //  sc.close();
 
 
 
