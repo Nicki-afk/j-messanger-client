@@ -16,17 +16,38 @@ public class LogMessage {
             Message msg = new MessageDecoder().decode(message);
             char[]chars = msg.getContent().toCharArray();
 
-            System.out.print("[  " + msg.getFrom() + "  ]  : " );
-
+            System.out.print(msg.getContent().length() > 70 ? "\n[  " + msg.getFrom() + "  ]  : " : "[  " + msg.getFrom() + "  ]  : " );
         
-            int x = 0;
-            while(x < chars.length){
-                
-                System.out.print(chars[x]);  // Печатает один символ в секунду
+        
 
-                x++;
-                Thread.sleep(20);
+            int x = 0;
+            int charSpace = 0;
+            while(x < chars.length){
+
+               
+                
+                if(charSpace >= 110){
+                                     
+                    System.out.println();
+                    System.out.print("                " + chars[x]);
+                    Thread.sleep(20);
+                    charSpace = 0;
+                    x++;
+                
+
+                }else{
+
+                    System.out.print(chars[x]);
+
+                    
+                    x++;
+                    charSpace++;
+                    Thread.sleep(20);
+                }
+
             }
+
+            
 
             System.out.println();
            
