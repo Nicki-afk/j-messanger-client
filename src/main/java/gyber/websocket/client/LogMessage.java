@@ -35,6 +35,8 @@ public class LogMessage {
             e.printStackTrace();
 
        }
+
+      
     
 
     }

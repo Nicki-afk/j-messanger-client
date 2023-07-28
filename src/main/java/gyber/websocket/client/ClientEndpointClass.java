@@ -17,6 +17,7 @@ public class ClientEndpointClass {
 
      private Session session;
      private String username;
+     private boolean connect;
 
 
      public ClientEndpointClass(){}
@@ -35,30 +36,31 @@ public class ClientEndpointClass {
     public void onOpen(Session session) {
 
         this.session = session;
+        connect = true;
 
         LogMessage.logClientMessage("Connect to server successful !!");
         logInByUser();
         LogMessage.logClientMessage("Your logined in server by username : " + this.username);
         
 
+          //new Thread(this::writeAMessage).start();
+
         try {
 
-        //     Thread.sleep(2000);
-        //    System.out.println("IS Open : " + session.isOpen());
+        
 
-        //     System.out.print(" >> ");
+         
 
-        //     String msg = new Scanner(System.in).nextLine();
-        //     System.out.println("MSG = " + msg);
+            // while(connect){
 
-        //     Message message = new Message("gyber", "gyber", msg);
+            //     Thread.sleep(2000);
+            //     writeAMessage();
+                
 
+            // }
+            writeAMessage();
 
-
-        //     session.getBasicRemote().sendObject(message);
-        //     System.out.println("IS Open : " + session.isOpen());
-
-        writeAMessage();
+    
            
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,9 +72,13 @@ public class ClientEndpointClass {
     public void onMessage(String message) {
         try{
 
+                //    Thread.sleep(1000);
+
+
         LogMessage.logMessage(message);
-        System.out.println();
-        writeAMessage();
+        System.out.println("Write a message");
+         writeAMessage();
+        //System.out.println("G");
     
 
 
@@ -97,13 +103,18 @@ public class ClientEndpointClass {
     public void writeAMessage(){
         try{
 
+           // Scanner sc = new Scanner(System.in);
+
+            
             String msg = new Scanner(System.in).nextLine();
+        
 
             Message message = new Message();
             
             if(msg.equals("exit")){
 
                this.session.close();
+               connect = false;
                LogMessage.logClientMessage("Your disconnect from server . Thank for using J-messanger");
 
             }else if (msg.contains("/")){
@@ -121,6 +132,7 @@ public class ClientEndpointClass {
                 message.setFrom(this.username);
                 message.setPrefixTo("");
                 message.setContent(msg);
+            
 
                 session.getBasicRemote().sendObject(new MessageEncoder().encode(message));
 
@@ -128,12 +140,18 @@ public class ClientEndpointClass {
             }
 
 
+          //  sc.close();
+
+
 
 
         }catch(Exception e){
             e.printStackTrace();
 
+ 
         }
+
+        return;
     }
 
     public String getUsername() {
