@@ -26,15 +26,9 @@ public class MainClass {
             ClientEndpointClass endpoint = new ClientEndpointClass();
     
             Session session = container.connectToServer(ClientEndpointClass.class, uri);
-            //Thread.sleep(5000);
+            session.setMaxIdleTimeout(120000);
 
             while(session.isOpen()){ Thread.sleep(3000);}
-
-            session.getBasicRemote().getSendStream().close();
-            session.close();
-        
-
-            // session.close();
             
         } catch (Exception e) {
             

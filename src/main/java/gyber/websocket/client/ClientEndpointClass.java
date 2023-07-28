@@ -26,7 +26,7 @@ public class ClientEndpointClass {
         this.session = session;
         LogMessage.logClientMessage("Connect to server successful !!");
         logInByUser();
-        LogMessage.logClientMessage("Your logined in server by username : " + this.username);
+        LogMessage.logClientMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!");
         writeAMessage();
 
     
@@ -44,9 +44,18 @@ public class ClientEndpointClass {
     public void logInByUser(){
         LogMessage.logClientMessage("Write your username to connect : ");
         System.out.print(": ");
-        this.username = new Scanner(System.in).nextLine();
 
-        // add a check
+        String username = new Scanner(System.in).nextLine(); 
+        
+
+        while(username.length() != 6){
+            LogMessage.logClientMessage("Impossible to login in this nickname . Nickname has been a 4 chars");
+            System.out.print(": ");
+            username = new Scanner(System.in).nextLine();
+
+        }
+
+        this.username = username;
         
         
     }
