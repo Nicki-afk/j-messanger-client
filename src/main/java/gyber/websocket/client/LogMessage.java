@@ -1,18 +1,24 @@
 package gyber.websocket.client;
 
+import gyber.websocket.codecs.MessageDecoder;
+
 public class LogMessage {
 
 
 
 
-    public static void logMessage(Message message){
+    public static void logMessage(String message){
 
-        System.out.print("[  " + message.getFrom() + "  ]  : " );
-
-
-        char[]chars = message.getContent().toCharArray();
+       
 
         try{
+
+            Message msg = new MessageDecoder().decode(message);
+            char[]chars = msg.getContent().toCharArray();
+
+            System.out.print("[  " + msg.getFrom() + "  ]  : " );
+
+        
             int x = 0;
             while(x < chars.length){
                 
