@@ -19,6 +19,7 @@ public class MainClass {
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
         
         try {       
+            System.out.println();
             URI uri = URI.create("ws://localhost:8080/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber");
 
 

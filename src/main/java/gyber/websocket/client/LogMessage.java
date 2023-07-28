@@ -73,12 +73,28 @@ public class LogMessage {
 
         
             int x = 0;
+            int charSpace = 0;
             while(x < chars.length){
-                
-                System.out.print(chars[x]);  // Печатает один символ в секунду
 
-                x++;
-                Thread.sleep(20);
+                if(charSpace >= 110){
+                                     
+                    System.out.println();
+                    System.out.print("                " + chars[x]);
+                    Thread.sleep(20);
+                    charSpace = 0;
+                    x++;
+                
+
+                }else{
+
+                    System.out.print(chars[x]);
+
+                    
+                    x++;
+                    charSpace++;
+                    Thread.sleep(20);
+                }
+                
             }
 
             System.out.println();
