@@ -2,7 +2,7 @@ package gyber.websocket.client;
 
 public class Message {
     private String from;
-    private String prefixTo; // через команду /username человек сможет отправить сообщение конкретному пользователю , если prefixTo не указан сообщение отправляется всем пользователям 
+    private String prefixTo;
     private String content;
 
 
@@ -12,9 +12,9 @@ public class Message {
 
 
 
-    public Message(String from, String to, String content) {
+    public Message(String from, String prefixTo, String content) {
         this.from = from;
-        this.prefixTo = to;
+        this.prefixTo = prefixTo;
         this.content = content;
     }
 
@@ -25,11 +25,11 @@ public class Message {
     public void setFrom(String from) {
         this.from = from;
     }
-    public String getTo() {
+    public String getPrefixTo() {
         return prefixTo;
     }
-    public void setTo(String to) {
-        this.prefixTo = to;
+    public void setPrefixTo(String prefixTo) {
+        this.prefixTo = prefixTo;
     }
     public String getContent() {
         return content;

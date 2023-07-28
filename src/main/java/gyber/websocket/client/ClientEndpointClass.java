@@ -85,18 +85,18 @@ public class ClientEndpointClass {
 
 
                 message.setFrom(username);
-                message.setTo(to);
+                message.setPrefixTo(to);
                 message.setContent(msg);
 
-                session.getBasicRemote().sendObject(msg);
+                session.getBasicRemote().sendObject(new MessageEncoder().encode(message));
 
             }else{
 
                 message.setFrom(username);
-                message.setTo("");
+                message.setPrefixTo("");
                 message.setContent(msg);
 
-                session.getBasicRemote().sendObject(msg);
+                session.getBasicRemote().sendObject(new MessageEncoder().encode(message));
 
 
             }
