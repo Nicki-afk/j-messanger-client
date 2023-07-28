@@ -10,6 +10,7 @@ import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
 import gyber.websocket.client.ClientEndpointClass;
+import gyber.websocket.client.LogMessage;
 
 public class MainClass {
 
@@ -19,7 +20,13 @@ public class MainClass {
         
         try {       
             URI uri = URI.create("ws://localhost:8080/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber");
+
+
+        
             ClientEndpointClass endpoint = new ClientEndpointClass();
+    
+
+            Thread.sleep(20);
 
             Session session = container.connectToServer(ClientEndpointClass.class, uri);
 

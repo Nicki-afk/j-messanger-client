@@ -1,10 +1,11 @@
 package gyber.websocket.client;
 
-import java.io.IOException;
-import java.net.URI;
 import java.util.Scanner;
 
-import javax.websocket.*;
+import javax.websocket.ClientEndpoint;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 
 import gyber.websocket.codecs.MessageDecoder;
 import gyber.websocket.codecs.MessageEncoder;
@@ -18,6 +19,16 @@ public class ClientEndpointClass {
      private String username;
 
 
+     public ClientEndpointClass(){}
+
+
+     public ClientEndpointClass(String username){
+        this.username = username;
+        System.out.println("Username to set : " + username);
+
+     }
+
+
 
 
     @OnOpen
@@ -26,6 +37,8 @@ public class ClientEndpointClass {
         this.session = session;
 
         LogMessage.logClientMessage("Connect to server successful !!");
+        logInByUser();
+        LogMessage.logClientMessage("Your logined in server by username : " + this.username);
         
 
         try {
@@ -66,6 +79,16 @@ public class ClientEndpointClass {
     }
 
 
+    public void logInByUser(){
+
+        LogMessage.logClientMessage("Write your username to connect : ");
+        System.out.print(">>> ");
+        this.username = new Scanner(System.in).nextLine();
+        
+        
+    }
+
+
 
 
     public void writeAMessage(){
@@ -92,7 +115,7 @@ public class ClientEndpointClass {
 
             }else{
 
-                message.setFrom(username);
+                message.setFrom(this.username);
                 message.setPrefixTo("");
                 message.setContent(msg);
 
@@ -109,6 +132,16 @@ public class ClientEndpointClass {
 
         }
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
 
     
 }
