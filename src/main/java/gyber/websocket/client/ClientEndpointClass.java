@@ -71,6 +71,8 @@ public class ClientEndpointClass {
         try{
 
         LogMessage.logMessage(message);
+        System.out.println();
+        writeAMessage();
     
 
 
