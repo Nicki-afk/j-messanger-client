@@ -71,6 +71,7 @@ public class ClientEndpointClass {
         try{
 
         LogMessage.logMessage(message);
+    
 
 
         }catch(Exception e){

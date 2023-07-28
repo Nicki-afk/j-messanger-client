@@ -20,7 +20,7 @@ public class LogMessage {
 
         
             int x = 0;
-            while(x < chars.length){
+            while(x <= chars.length){
                 
                 System.out.print(chars[x]);  // Печатает один символ в секунду
 
@@ -29,6 +29,7 @@ public class LogMessage {
             }
 
             System.out.println();
+           
             
        }catch(Exception e){
             e.printStackTrace();
