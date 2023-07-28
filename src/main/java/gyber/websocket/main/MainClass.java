@@ -28,10 +28,10 @@ public class MainClass {
             Session session = container.connectToServer(ClientEndpointClass.class, uri);
             //Thread.sleep(5000);
 
-            while(true){ Thread.sleep(3000);}
+            while(session.isOpen()){ Thread.sleep(3000);}
 
-            // session.getBasicRemote().getSendStream().close();
-            // session.close();
+            session.getBasicRemote().getSendStream().close();
+            session.close();
         
 
             // session.close();

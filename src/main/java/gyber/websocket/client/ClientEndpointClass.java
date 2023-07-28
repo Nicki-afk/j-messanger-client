@@ -17,17 +17,6 @@ public class ClientEndpointClass {
 
      private Session session;
      private String username;
-     private boolean connect;
-
-
-     public ClientEndpointClass(){}
-
-
-     public ClientEndpointClass(String username){
-        this.username = username;
-        System.out.println("Username to set : " + username);
-
-     }
 
 
 
@@ -36,7 +25,10 @@ public class ClientEndpointClass {
     public void onOpen(Session session) {
 
         this.session = session;
-        connect = true;
+
+
+
+    
 
         LogMessage.logClientMessage("Connect to server successful !!");
         logInByUser();
@@ -107,8 +99,8 @@ public class ClientEndpointClass {
             if(msg.equals("exit")){
 
                this.session.close();
-               connect = false;
                LogMessage.logClientMessage("Your disconnect from server . Thank for using J-messanger");
+               System.out.println();
 
             }else if (msg.contains("/")){
                 String to = msg.substring(msg.indexOf('/'),  msg.indexOf(' ')-1);
@@ -154,6 +146,11 @@ public class ClientEndpointClass {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
+    
+
+    
 
     
 
