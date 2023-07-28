@@ -15,6 +15,8 @@ public class ClientEndpointClass {
 
 
      private Session session;
+     private String username;
+
 
 
 
@@ -51,9 +53,56 @@ public class ClientEndpointClass {
     @OnMessage
     public void onMessage(String message) {
         try{
-        System.out.println("Received: " + new MessageDecoder().decode(message).getContent());
+
+        LogMessage.logMessage(message);
+
+
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+
+
+
+    public void writeAMessage(){
+        try{
+
+            String msg = new Scanner(System.in).nextLine();
+
+            Message message = new Message();
+            
+            if(msg.equals("exit")){
+               this.session.close();
+               System.out.println("Your disconnect from server . Thank for using J-messanger");
+
+            }else if (msg.contains("/")){
+                String to = msg.substring(msg.indexOf('/'),  msg.indexOf(' ')-1);
+
+
+                message.setFrom(username);
+                message.setTo(to);
+                message.setContent(msg);
+
+                session.getBasicRemote().sendObject(msg);
+
+            }else{
+
+                message.setFrom(username);
+                message.setTo("");
+                message.setContent(msg);
+
+                session.getBasicRemote().sendObject(msg);
+
+
+            }
+
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+
         }
     }
 
