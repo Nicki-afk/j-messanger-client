@@ -26,9 +26,9 @@ public class MainClass {
             ClientEndpointClass endpoint = new ClientEndpointClass();
     
             Session session = container.connectToServer(ClientEndpointClass.class, uri);
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
 
-            //while(true){ Thread.sleep(1000);}
+            while(true){ Thread.sleep(3000);}
 
             // session.getBasicRemote().getSendStream().close();
             // session.close();

@@ -72,14 +72,9 @@ public class ClientEndpointClass {
     public void onMessage(String message) {
         try{
 
-                //    Thread.sleep(1000);
-
-
-        LogMessage.logMessage(message);
-        System.out.println("Write a message");
+         LogMessage.logMessage(message);
          writeAMessage();
-        //System.out.println("G");
-    
+
 
 
         }catch(Exception e){
@@ -91,7 +86,7 @@ public class ClientEndpointClass {
     public void logInByUser(){
 
         LogMessage.logClientMessage("Write your username to connect : ");
-        System.out.print(">>> ");
+        System.out.print(": ");
         this.username = new Scanner(System.in).nextLine();
         
         
@@ -103,9 +98,7 @@ public class ClientEndpointClass {
     public void writeAMessage(){
         try{
 
-           // Scanner sc = new Scanner(System.in);
-
-            
+            System.out.print(": ");
             String msg = new Scanner(System.in).nextLine();
         
 
