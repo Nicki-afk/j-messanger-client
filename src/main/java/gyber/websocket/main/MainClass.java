@@ -20,6 +20,7 @@ public class MainClass {
         
         try {       
             System.out.println();
+            LogMessage.logClientMessage("Welcome to J-messander. Thank you for using my messenger. ");
             URI uri = URI.create("ws://localhost:8080/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber");
 
 
