@@ -24,25 +24,28 @@ public class ClientEndpointClass {
     public void onOpen(Session session) {
 
         this.session = session;
-        System.out.println("Connected! ");
+
+        LogMessage.logClientMessage("Connect to server successful !!");
         
 
         try {
 
-            Thread.sleep(2000);
-           System.out.println("IS Open : " + session.isOpen());
+        //     Thread.sleep(2000);
+        //    System.out.println("IS Open : " + session.isOpen());
 
-            System.out.print(" >> ");
+        //     System.out.print(" >> ");
 
-            String msg = new Scanner(System.in).nextLine();
-            System.out.println("MSG = " + msg);
+        //     String msg = new Scanner(System.in).nextLine();
+        //     System.out.println("MSG = " + msg);
 
-            Message message = new Message("gyber", "gyber", msg);
+        //     Message message = new Message("gyber", "gyber", msg);
 
 
 
-            session.getBasicRemote().sendObject(message);
-            System.out.println("IS Open : " + session.isOpen());
+        //     session.getBasicRemote().sendObject(message);
+        //     System.out.println("IS Open : " + session.isOpen());
+
+        writeAMessage();
            
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,8 +76,9 @@ public class ClientEndpointClass {
             Message message = new Message();
             
             if(msg.equals("exit")){
+
                this.session.close();
-               System.out.println("Your disconnect from server . Thank for using J-messanger");
+               LogMessage.logClientMessage("Your disconnect from server . Thank for using J-messanger");
 
             }else if (msg.contains("/")){
                 String to = msg.substring(msg.indexOf('/'),  msg.indexOf(' ')-1);
