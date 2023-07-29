@@ -2,6 +2,7 @@ package gyber.websocket.client;
 
 import gyber.websocket.codecs.MessageDecoder;
 
+// TODO : Сделать перегрузку методов и убрать дублирующийся код
 public class LogMessage {
 
 
@@ -105,6 +106,51 @@ public class LogMessage {
        }
 
 
+
+    }
+
+    public static void logPrintClientMessage(String mString){
+
+
+        try{
+
+            
+            char[]chars = mString.toCharArray();
+
+            System.out.print("[  " + "CLIENT" + "  ]  : " );
+
+        
+            int x = 0;
+            int charSpace = 0;
+            while(x < chars.length){
+
+                if(charSpace >= 110){
+                                     
+                    System.out.println();
+                    System.out.print("                " + chars[x]);
+                    Thread.sleep(20);
+                    charSpace = 0;
+                    x++;
+                
+
+                }else{
+
+                    System.out.print(chars[x]);
+
+                    
+                    x++;
+                    charSpace++;
+                    Thread.sleep(20);
+                }
+                
+            }
+
+            // System.out.println();
+            
+       }catch(Exception e){
+            e.printStackTrace();
+
+       }
 
     }
     
