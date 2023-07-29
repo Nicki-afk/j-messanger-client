@@ -59,12 +59,9 @@ public class MainClass {
 
 
         System.out.println();
-        LogMessage.logClientMessage("Welcome to J-messander. Thank you for using my messenger. Please write IP WebSocket Serve for connect ");
-
-        System.out.print(": ");
+        LogMessage.logPrintClientMessage("Welcome to J-messander. Thank you for using my messenger. Please write IP WebSocket Server for connect : ");
         String ipServer = sc.nextLine();
-        LogMessage.logClientMessage("Great IP Server is { " + ipServer + " } . Write please a port server to connect :");
-        System.out.print(": ");
+        LogMessage.logPrintClientMessage("Great IP Server is { " + ipServer + " } . Write please a port server to connect :");
         String portServer = sc.nextLine();
         LogMessage.logClientMessage("IP Server to connect is { " + ipServer + " } port server is { " + portServer + "} . Strart to configure connection..." );
         String fullUriAdress = "ws://"
