@@ -42,15 +42,13 @@ public class ClientEndpointClass {
 
 
     public void logInByUser(){
-        LogMessage.logClientMessage("Write your username to connect : ");
-        System.out.print(": ");
-
+        LogMessage.logPrintClientMessage("Write your username to connect : ");
         String username = new Scanner(System.in).nextLine(); 
         
 
         while(username.length() != 6){
-            LogMessage.logClientMessage("Impossible to login in this nickname . Nickname has been a 4 chars");
-            System.out.print(": ");
+            LogMessage.logPrintClientMessage("Impossible to login in this nickname . Nickname has been a 4 chars. Repeat to write your username : ");
+          
             username = new Scanner(System.in).nextLine();
 
         }
