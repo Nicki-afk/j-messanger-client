@@ -65,7 +65,7 @@
                       <mainClass>gyber.websocket.main.MainClass</mainClass>
                   </manifest>
               </archive>
-              <finalName>gyberwebsocket-client-0.0.2-alpha</finalName>
+              <finalName>gyberwebsocket-client-0.0.3-alpha</finalName>
           </configuration>
       </plugin>
 
