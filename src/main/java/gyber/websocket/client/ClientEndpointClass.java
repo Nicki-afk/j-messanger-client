@@ -81,10 +81,6 @@ public class ClientEndpointClass {
                 String args = msg.substring(msg.indexOf(' ')+1);
 
 
-
-                LogMessage.logMessage("'" + command + "'", false);
-                LogMessage.logMessage("'" + args + "'", false);
-
                 if(command.equals("/styleprint") && args.equals("--off")){
                     LogMessage.STYLE_PRINT = false;
                     LogMessage.logMessage("Text output changed successfully. Now the characters will not be printed character by character", false);
