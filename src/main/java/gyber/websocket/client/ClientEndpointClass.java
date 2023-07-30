@@ -24,7 +24,7 @@ public class ClientEndpointClass {
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
-        LogMessage.logMessage("Connect to server successful !!" );
+        LogMessage.logMessage("Connect to server successful !!" , false );
         logInByUser();
         LogMessage.logMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!" , false);
         writeAMessage();
@@ -34,7 +34,7 @@ public class ClientEndpointClass {
 
     @OnMessage
     public void onMessage(String message) {
-        LogMessage.logMessage(message , false);
+        LogMessage.logMessage(message );
         writeAMessage();
 
 
