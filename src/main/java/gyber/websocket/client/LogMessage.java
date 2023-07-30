@@ -9,7 +9,8 @@ public class LogMessage {
 
 
 
-    public static boolean stylePrint = true;  // Переменная отвечает за стиль отрисовки текста если она true то текст будет выводится по буквенно если нет то обычным текстом
+    public static boolean STYLE_PRINT = true;       // Переменная отвечает за стиль отрисовки текста если она true то текст будет выводится по буквенно если нет то обычным текстом
+    public static long CHAR_PER_MILLISECOND = 20;   // Изменяет скорость печати символа в милисекнду  
 
 
 
@@ -19,7 +20,7 @@ public class LogMessage {
 
         try{
 
-            if(stylePrint){
+            if(STYLE_PRINT){
 
                     Message msg = new MessageDecoder().decode(message);
                     char[]chars = msg.getContent().toCharArray();
@@ -111,7 +112,7 @@ public class LogMessage {
 
         try{
 
-            if(stylePrint){
+            if(STYLE_PRINT){
 
 
 
