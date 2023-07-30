@@ -4,13 +4,19 @@
 
 This is a small program with which you can connect to a WebSocket message server and chat with friends. This version, which is presented in this repository in the jar folder **( gyberwebsocket-client-0.0.3-alpha.zip )** is quite raw, but it is enough to correspond with friends. Let's get started!
 
-## Version note
+<br>
+
+---
+## Version note 0.0.4-alpha
 
 **In the new version 0.0.4-alpha, the following bugs have been fixed, and the following features have been added:**
 
  - The output of messages has been fixed, now the line break occurs by words and not by letters as it was before
  - Added the ability to disable message output character by character using the `/styleprint --off`  command. Also added the ability to change the speed of printing characters using the command `/charpm "time in milliseconds "`
 
+---
+
+<br>
 
 ### Start Application 
 
