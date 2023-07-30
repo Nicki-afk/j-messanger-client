@@ -34,7 +34,7 @@ public class ClientEndpointClass {
 
     @OnMessage
     public void onMessage(String message) {
-        LogMessage.logMessage(message );
+        LogMessage.logMessage(message);
         writeAMessage();
 
 

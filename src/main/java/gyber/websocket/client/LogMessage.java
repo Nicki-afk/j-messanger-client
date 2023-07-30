@@ -16,12 +16,14 @@ public class LogMessage {
         try{
             Message msg = new MessageDecoder().decode(message);
             String contentMessage = msg.getContent();
+
+            System.out.print(msg.getContent().length() > 70 ? "\n[  " + msg.getFrom() + "  ]  : " : "[  " + msg.getFrom() + "  ]  : " );
          
              
 
             if(STYLE_PRINT){
                 char[]chars = arrangeLineBreaksAndSpaces(contentMessage).toCharArray();
-                System.out.print(msg.getContent().length() > 70 ? "\n[  " + msg.getFrom() + "  ]  : " : "[  " + msg.getFrom() + "  ]  : " );
+
                 
                 
                 int x = 0;
@@ -35,7 +37,7 @@ public class LogMessage {
 
             }else{
 
-                System.out.print(arrangeLineBreaksAndSpaces(message));
+                System.out.print(arrangeLineBreaksAndSpaces(contentMessage));
             
             }
 
