@@ -3,7 +3,6 @@ package gyber.websocket.client;
 public class Message {
     private String from;
     private String prefixTo;
-    private String prefixPrint;         // С помощью этого префикса можно указать стиль отрисовки сообщения на клиенте
     private String content;
 
 
@@ -20,14 +19,6 @@ public class Message {
     }
 
     
-
-
-    public Message(String from, String prefixTo, String prefixPrint, String content) {
-        this.from = from;
-        this.prefixTo = prefixTo;
-        this.prefixPrint = prefixPrint;
-        this.content = content;
-    }
 
 
 
@@ -50,17 +41,6 @@ public class Message {
         this.content = content;
     }
 
-
-
-    public String getPrefixPrint() {
-        return prefixPrint;
-    }
-
-
-
-    public void setPrefixPrint(String prefixPrint) {
-        this.prefixPrint = prefixPrint;
-    }
 
     
 
