@@ -24,7 +24,7 @@ public class ClientEndpointClass {
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
-        LogMessage.logMessage("Connect to server successful !!" ,false);
+        LogMessage.logMessage("Connect to server successful !!" );
         logInByUser();
         LogMessage.logMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!" , false);
         writeAMessage();
@@ -34,7 +34,7 @@ public class ClientEndpointClass {
 
     @OnMessage
     public void onMessage(String message) {
-        LogMessage.logMessage(message);
+        LogMessage.logMessage(message , false);
         writeAMessage();
 
 
@@ -77,14 +77,30 @@ public class ClientEndpointClass {
                System.out.println();
 
             }else if (msg.contains("/")){
-                String to = msg.substring(msg.indexOf('/'),  msg.indexOf(' ')-1);
+                String command = msg.substring(msg.indexOf('/'),  msg.indexOf(' '));
+                String args = msg.substring(msg.indexOf(' ')+1);
 
 
-                message.setFrom(username);
-                message.setPrefixTo(to);
-                message.setContent(msg);
 
-                session.getBasicRemote().sendObject(new MessageEncoder().encode(message));
+                LogMessage.logMessage("'" + command + "'", false);
+                LogMessage.logMessage("'" + args + "'", false);
+
+                if(command.equals("/styleprint") && args.equals("--off")){
+                    LogMessage.STYLE_PRINT = false;
+                    LogMessage.logMessage("Text output changed successfully. Now the characters will not be printed character by character", false);
+                          
+                }else if(command.equals("/styleprint") && args.equals("--on")){
+
+                    LogMessage.logMessage("Text output changed successfully. Now the characters will be printed character by character. You can change the print speed using the /charpm command", false);
+                    LogMessage.STYLE_PRINT = true;
+
+                }else if(command.equals("/charpm")){
+                    LogMessage.CHAR_PER_MILLISECOND = Long.parseLong(args);
+                    LogMessage.logMessage("The command has been successfully applied. Characters will be printed once per " + args, false);
+
+                }
+
+                writeAMessage();
 
             }else{
 
