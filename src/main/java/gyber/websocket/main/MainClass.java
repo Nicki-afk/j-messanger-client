@@ -20,27 +20,9 @@ public class MainClass {
 
 
     public static void main(String[] args) {
-    
 
-     //   WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-        
         try {       
-            // System.out.println();
-            // LogMessage.logClientMessage("Welcome to J-messander. Thank you for using my messenger. ");
-            // URI uri = URI.create("ws://localhost:8080/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber");
-
-
-        
-            // ClientEndpointClass endpoint = new ClientEndpointClass();
-    
-            // Session session = container.connectToServer(ClientEndpointClass.class, uri);
-            // session.setMaxIdleTimeout(120000);
-
-
-
-            // while(session.isOpen()){ Thread.sleep(3000);}
-
-         //preStart();
+          
 
          MainClass mainClass = new MainClass();
          mainClass.preStart();
@@ -59,22 +41,24 @@ public class MainClass {
 
 
         System.out.println();
-        LogMessage.logPrintClientMessage("Welcome to J-messander. Thank you for using my messenger. Please write IP WebSocket Server for connect : ");
+        LogMessage.logMessage("Welcome to J-messander. Thank you for using my messenger. Please write IP WebSocket Server for connect : " , true);
+
+
         String ipServer = sc.nextLine();
-        LogMessage.logPrintClientMessage("Great IP Server is { " + ipServer + " } . Write please a port server to connect :");
+        LogMessage.logMessage("Great IP Server is { " + ipServer + " } . Write please a port server to connect :" , true);
         String portServer = sc.nextLine();
-        LogMessage.logClientMessage("IP Server to connect is { " + ipServer + " } port server is { " + portServer + "} . Strart to configure connection..." );
+        LogMessage.logMessage("IP Server to connect is { " + ipServer + " } port server is { " + portServer + "} . Strart to configure connection..."  , false);
         String fullUriAdress = "ws://"
                                 .concat(ipServer)
                                 .concat(":")
                                 .concat(portServer)
                                 .concat("/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber");
 
-        LogMessage.logClientMessage("Creating full adress ...");
+        LogMessage.logMessage("Creating full adress ..." , false);
 
         this.uriServer = URI.create(fullUriAdress);
 
-        LogMessage.logClientMessage("Adress create successful ! Init a connection for " + fullUriAdress);
+        LogMessage.logMessage("Adress create successful ! Init a connection for " + fullUriAdress , false);
         System.out.println();
 
         try{

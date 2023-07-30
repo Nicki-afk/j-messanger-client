@@ -24,9 +24,9 @@ public class ClientEndpointClass {
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
-        LogMessage.logClientMessage("Connect to server successful !!");
+        LogMessage.logMessage("Connect to server successful !!" ,false);
         logInByUser();
-        LogMessage.logClientMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!");
+        LogMessage.logMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!" , false);
         writeAMessage();
 
     
@@ -42,12 +42,12 @@ public class ClientEndpointClass {
 
 
     public void logInByUser(){
-        LogMessage.logPrintClientMessage("Write your username to connect : ");
+        LogMessage.logMessage("Write your username to connect : " , true);
         String username = new Scanner(System.in).nextLine(); 
         
 
         while(username.length() != 6){
-            LogMessage.logPrintClientMessage("Impossible to login in this nickname . Nickname has been a 4 chars. Repeat to write your username : ");
+            LogMessage.logMessage("Impossible to login in this nickname . Nickname has been a 4 chars. Repeat to write your username : " , true);
           
             username = new Scanner(System.in).nextLine();
 
@@ -73,7 +73,7 @@ public class ClientEndpointClass {
             if(msg.equals("exit")){
 
                this.session.close();
-               LogMessage.logClientMessage("Your disconnect from server . Thank for using J-messanger");
+               LogMessage.logMessage("Your disconnect from server . Thank for using J-messanger" , false);
                System.out.println();
 
             }else if (msg.contains("/")){
