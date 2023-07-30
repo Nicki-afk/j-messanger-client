@@ -30,7 +30,7 @@ Recommended system settings to run the application:
 And so, first of all, you should download the repository or clone it to your computer, after that you will get into the jar folder, unpack the archive where it is convenient for you, and run its accompanying command: 
 
 ```
-java -jar gyberwebsocket-client-0.0.3-alpha.jar
+java -jar gyberwebsocket-client-0.0.4-alpha.jar
 
 ```
 
