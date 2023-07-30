@@ -112,68 +112,35 @@ public class LogMessage {
         try{
 
             if(stylePrint){
-                    char[]chars = message.toCharArray();
-                   System.out.print("[  " + "CLIENT" + "  ]  : " );
+
+
+
+                char[]chars = arrangeLineBreaksAndSpaces(message).toCharArray();
+                System.out.print("[  " + "CLIENT" + "  ]  : " );
                 
                 
 
-                    int x = 0;
-                    int charSpace = 0;
-                    while(x < chars.length){
+                int x = 0;
+                
+                while(x < chars.length){
 
-                    
-                        
-                        if(charSpace >= 110){
-                                            
-                            System.out.println();
-                            System.out.print("                " + chars[x]);
-                            Thread.sleep(20);
-                            charSpace = 0;
-                            x++;
-                        
+                    System.out.print(chars[x]);
+                    Thread.sleep(20);
+                    x++;
 
-                        }else{
+                }
 
-                            System.out.print(chars[x]);
 
-                            
-                            x++;
-                            charSpace++;
-                            Thread.sleep(20);
-                        }
+                if(!haveInput){
+                    System.out.println();
 
-                    }
-
-                    if(!haveInput){
-                        System.out.println();
-
-                    }
+                }
 
 
 
             }else{
 
-                String words[] = message.split(" ");
-
-                // Расставляем переносы стороки 
-                int newLineIndex = 0;
-                for(int x = 0;  x < words.length; x++){
-                    if(newLineIndex == 10){
-                        words[x] = words[x].concat(" \n".concat("               "));
-                        newLineIndex = 0;
-
-                    }
-                    newLineIndex++;
-
-
-                }
-
-                System.out.print("[  " + "CLIENT" + "  ]  : " );
-
-                // Выводим 
-                for(String i : words){
-                    System.out.print(i + " ");
-                }
+                System.out.print("[  " + "CLIENT" + "  ]  : ".concat(arrangeLineBreaksAndSpaces(message)));
 
 
                 if(!haveInput){
@@ -192,6 +159,47 @@ public class LogMessage {
 
 
 
+
+    }
+
+
+    private static String arrangeLineBreaksAndSpaces(String msg){
+
+        
+
+        String words[] = msg.split(" ");
+        String returnVar = "";
+
+        
+
+        // Расставляем переносы стороки и пробелы 
+                int newLineIndex = 0;
+                for(int x = 0;  x < words.length; x++){
+                    if(newLineIndex == 10){
+                        words[x] = words[x].concat(" \n".concat("               "));
+                        newLineIndex = 0;
+
+                    }
+                    newLineIndex++;
+
+
+                }
+
+
+
+                // Трансформируем в строку
+                for(String i : words){
+                    //System.out.print(i + " ");
+                    returnVar += i.concat(" ");
+                }
+
+            
+
+
+
+
+
+        return returnVar;
 
     }
 
