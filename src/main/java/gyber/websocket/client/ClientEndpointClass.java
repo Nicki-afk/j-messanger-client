@@ -33,46 +33,48 @@ public class ClientEndpointClass {
         LogMessage.logMessage("Connect to server successful !!" , false );
         logInByUser();
         LogMessage.logMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!" , false);
-        // writeAMessage();
 
 
 
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                // Listen for user input and send messages
-                while (true) {
-                    writeAMessage();
+        try{
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    // Слушаем ввод 
+                    while (true) {
+                        System.out.println();
+                        writeAMessage();
+                    }
+
                 }
-            }
-        });
+            });
 
 
-        executorService.execute(() -> {
-            try {
-                while (true) {
-                    // Берем сообщение из очереди и выводим его
-                    String message = incomingMessages.take();
-                    LogMessage.logMessage(message);
-                    writeAMessage();
+            executorService.execute(() -> {
+                try {
+                    while (true) {
+                        // Берем сообщение из очереди и выводим его
+                        String message = incomingMessages.take();
+                        LogMessage.logMessage(message);
+                    
+                    }
+
+
+                    
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        });
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     
     }
 
     @OnMessage
     public void onMessage(String message) {
-        // LogMessage.logMessage(message);
-        // writeAMessage();
-
         incomingMessages.add(message);
-
-
-
     }
 
 
@@ -96,10 +98,11 @@ public class ClientEndpointClass {
 
 
 
+    // TODO : Разобратся с потоками . System.exit(0) == Bad practice
     public void writeAMessage(){
         try{
 
-            System.out.print(": ");
+           // System.out.print(": ");
             String msg = new Scanner(System.in).nextLine();
         
 
@@ -110,6 +113,8 @@ public class ClientEndpointClass {
                this.session.close();
                LogMessage.logMessage("Your disconnect from server . Thank for using J-messanger" , false);
                System.out.println();
+               System.exit(0);          // Убиваем все потоки :(
+        
 
             }else if (msg.contains("/")){
                 String command = msg.substring(msg.indexOf('/'),  msg.indexOf(' '));
