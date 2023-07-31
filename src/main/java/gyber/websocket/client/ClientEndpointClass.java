@@ -1,6 +1,10 @@
 package gyber.websocket.client;
 
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnMessage;
@@ -17,6 +21,8 @@ public class ClientEndpointClass {
 
      private Session session;
      private String username;
+     private BlockingQueue<String> incomingMessages = new LinkedBlockingQueue<>();
+     private ExecutorService executorService = Executors.newFixedThreadPool(2); 
 
 
 
@@ -27,15 +33,44 @@ public class ClientEndpointClass {
         LogMessage.logMessage("Connect to server successful !!" , false );
         logInByUser();
         LogMessage.logMessage("Your logined in server by username : " + this.username + " Now you can chat with other members !!!" , false);
-        writeAMessage();
+        // writeAMessage();
+
+
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                // Listen for user input and send messages
+                while (true) {
+                    writeAMessage();
+                }
+            }
+        });
+
+
+        executorService.execute(() -> {
+            try {
+                while (true) {
+                    // Берем сообщение из очереди и выводим его
+                    String message = incomingMessages.take();
+                    LogMessage.logMessage(message);
+                    writeAMessage();
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
 
     
     }
 
     @OnMessage
     public void onMessage(String message) {
-        LogMessage.logMessage(message);
-        writeAMessage();
+        // LogMessage.logMessage(message);
+        // writeAMessage();
+
+        incomingMessages.add(message);
+
 
 
     }
