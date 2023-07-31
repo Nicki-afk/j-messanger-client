@@ -5,7 +5,7 @@ import gyber.websocket.codecs.MessageDecoder;
 
 public class LogMessage {
     public static boolean STYLE_PRINT = true;       // Переменная отвечает за стиль отрисовки текста если она true то текст будет выводится по буквенно если нет то обычным текстом
-    public static long CHAR_PER_MILLISECOND = 20;   // Изменяет скорость печати символа в милисекнду  
+    public static long CHAR_PER_MILLISECOND = 12;   // Изменяет скорость печати символа в милисекнду  
 
 
 
