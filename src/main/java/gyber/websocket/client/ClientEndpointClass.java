@@ -94,7 +94,9 @@ public class ClientEndpointClass {
 
             }else{
 
-              this.username = username;
+        
+
+              this.username = username.toLowerCase();
               break;
 
             }
