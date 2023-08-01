@@ -63,10 +63,11 @@ public class ClientEndpointClass {
                     
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                   LogMessage.logMessage("Exception by print message or input Thread ", false);
                 }
             });
         }catch(Exception e){
-            e.printStackTrace();
+            LogMessage.logMessage("CRITICAL ERROR ON THREADS ", false);
         }
 
     
@@ -80,17 +81,28 @@ public class ClientEndpointClass {
 
     public void logInByUser(){
         LogMessage.logMessage("Write your username to connect : " , true);
-        String username = new Scanner(System.in).nextLine(); 
+        String username = "";
         
 
-        while(username.length() != 6){
-            LogMessage.logMessage("Impossible to login in this nickname . Nickname has been a 4 chars. Repeat to write your username : " , true);
-          
+        
+        while(true){
+
             username = new Scanner(System.in).nextLine();
+
+            if(username == null || username.isEmpty() || username.length() != 6){
+                LogMessage.logMessage("Impossible to login in this nickname . Nickname has been a 4 chars. Repeat to write your username : " , true);
+
+            }else{
+
+              this.username = username;
+              break;
+
+            }
 
         }
 
-        this.username = username;
+        
+    
         
         
     }
