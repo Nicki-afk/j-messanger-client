@@ -116,30 +116,25 @@ public class MainClass {
                             }catch(NumberFormatException e){
                                 LogMessage.logMessage("Port server invalid , please write a port server again : ", true);
                             }
-                            
+
                         }
 
+                        configAdnConnectToServer(portServer, serverName);
 
+                    }else{
 
+                        String fullServerAdress = serverProperties.getProperty(serverName);
 
+                        this.uriServer = URI.create(fullServerAdress);
+                        LogMessage.logMessage("Adress create successful ! Init a connection for " + fullServerAdress , false);
+                        System.out.println();
 
+                        ClientEndpointClass clientEndpointClass = new ClientEndpointClass();
+                        Session session = container.connectToServer(ClientEndpointClass.class , uriServer);
+                        session.setMaxIdleTimeout(120000);
 
-
-
-
+                        while(session.isOpen()){Thread.sleep(3000);}
                     }
-
-                    String fullServerAdress = serverProperties.getProperty(serverName);
-
-                    this.uriServer = URI.create(fullServerAdress);
-                    LogMessage.logMessage("Adress create successful ! Init a connection for " + fullServerAdress , false);
-                    System.out.println();
-
-                    ClientEndpointClass clientEndpointClass = new ClientEndpointClass();
-                    Session session = container.connectToServer(ClientEndpointClass.class , uriServer);
-                    session.setMaxIdleTimeout(120000);
-
-                    while(session.isOpen()){Thread.sleep(3000);}
 
 
 
@@ -254,6 +249,88 @@ public class MainClass {
         }
 
 
+
+    }
+
+
+    public void configAdnConnectToServer(String serverIp , String serverPort){
+        try{
+
+
+            String fullUriAdress = "ws://"
+                                .concat(serverIp)
+                                .concat(":")
+                                .concat(serverPort)
+                                .concat("/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber");
+
+            LogMessage.logMessage("Creating full adress ..." , false);
+
+            this.uriServer = URI.create(fullUriAdress);
+            LogMessage.logMessage("Adress create successful ! Init a connection for " + fullUriAdress , false);
+            System.out.println();
+
+            ClientEndpointClass clientEndpointClass = new ClientEndpointClass();
+            Session session = container.connectToServer(ClientEndpointClass.class , uriServer);
+            session.setMaxIdleTimeout(120000);
+
+            while(session.isOpen()){Thread.sleep(3000);}
+
+
+        }catch(DeploymentException deploymentException){
+            LogMessage.logMessage("Error to connect on server , Impossible to create new session. The server may not be available, please try again later. Perhaps the problem is also related to your server IP or port. Make sure your connection details are correct", false);
+            
+
+        }catch(IOException ioException){
+            LogMessage.logMessage("Error to connect on server . Error on your network or Protocol. Check your network and try again ", false);
+
+        }catch(IllegalArgumentException illegalArgumentException){
+            LogMessage.logMessage("Error to connect on server. Impossible to set session time-out", false);
+
+        }catch(IllegalStateException illegalStateException){
+            LogMessage.logMessage("Error to set session time-out . The session may not be close", false);
+
+        }catch(InterruptedException interruptedException){
+            LogMessage.logMessage("Error thread. The stream was interrupted by an unknown", false);
+
+        }
+
+    }
+
+
+
+     public void configAdnConnectToServer(String adress ){
+        try{
+
+
+
+            this.uriServer = URI.create(adress);
+            LogMessage.logMessage("Adress create successful ! Init a connection for " + adress , false);
+            System.out.println();
+
+            ClientEndpointClass clientEndpointClass = new ClientEndpointClass();
+            Session session = container.connectToServer(ClientEndpointClass.class , uriServer);
+            session.setMaxIdleTimeout(120000);
+
+            while(session.isOpen()){Thread.sleep(3000);}
+
+
+        }catch(DeploymentException deploymentException){
+            LogMessage.logMessage("Error to connect on server , Impossible to create new session. The server may not be available, please try again later. Perhaps the problem is also related to your server IP or port. Make sure your connection details are correct", false);
+            
+
+        }catch(IOException ioException){
+            LogMessage.logMessage("Error to connect on server . Error on your network or Protocol. Check your network and try again ", false);
+
+        }catch(IllegalArgumentException illegalArgumentException){
+            LogMessage.logMessage("Error to connect on server. Impossible to set session time-out", false);
+
+        }catch(IllegalStateException illegalStateException){
+            LogMessage.logMessage("Error to set session time-out . The session may not be close", false);
+
+        }catch(InterruptedException interruptedException){
+            LogMessage.logMessage("Error thread. The stream was interrupted by an unknown", false);
+
+        }
 
     }
 
