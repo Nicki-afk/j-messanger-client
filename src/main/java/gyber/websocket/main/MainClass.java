@@ -1,8 +1,10 @@
 package gyber.websocket.main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -295,22 +297,60 @@ public class MainClass {
     }
 
 
-    public void saveAServerData(String serverName , String serverIp , String serverPort){
+    public void saveAServerData(String serverIp , String serverPort){
         try{
+            Scanner sc = new Scanner(System.in);
 
+            LogMessage.logMessage("IP Server to connect is { " + serverIp + " } port server is { " + serverPort + "} . Strart to configure connection..."  , false);
+            LogMessage.logMessage("Save a this connection data ? [Y/n]", true);
 
-            File fileToWrite = new File("gyberwebsocket/src/main/resources/server.properties");
-            List<String>serverNames = new ArrayList<>();
+            String answer = sc.nextLine();
+            if(answer.equalsIgnoreCase(answer)){
 
-            try(BufferedReader reader = new BufferedReader(new FileReader(fileToWrite))){
-                String i = "";
-                while((i = reader.readLine()) != null){
-                    serverNames.add(i);
+                LogMessage.logMessage("Write a name server to save : ", true);  
+                String serverSaveName = sc.nextLine();
+
+                File fileToWrite = new File("gyberwebsocket/src/main/resources/server.properties");
+                List<String>serverNames = new ArrayList<>();
+
+                try(BufferedReader reader = new BufferedReader(new FileReader(fileToWrite))){
+                    String i = "";
+                    while((i = reader.readLine()) != null){
+                        serverNames.add(i);
+                    }
+
                 }
 
-            }
-            System.out.println("List : " + serverNames);
+                serverNames.add(
+                    serverSaveName
+                    .concat("=")
+                    .concat("ws://")
+                    .concat(serverIp)
+                    .concat(":")
+                    .concat(serverPort)
+                    .concat("/gyberwebsocket-0.0.2-inside-test/chat/gyber?gyber")
+                    .concat("\n")
+                    
+                );
 
+                try(BufferedWriter writer  = new BufferedWriter(new FileWriter(fileToWrite))){
+                    int x = 0;
+                    while(x < serverNames.size()){
+                        writer.write(serverNames.get(x));
+                    }
+
+                }
+           
+
+                    
+
+
+            }else{
+                return;
+            }
+
+
+           
 
 
         }catch(Exception e){
