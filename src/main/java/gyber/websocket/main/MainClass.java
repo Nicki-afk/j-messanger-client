@@ -47,18 +47,21 @@ public class MainClass {
 
 
             try{
-                File theServerDataFile = new File("gyberwebsocket/src/main/resources/server.properties");
+                String ipServer = "" , portServer = "";
+                String filePath = "gyberwebsocket/src/main/resources/server.properties";
+                File theServerDataFile = new File(filePath);
+                
 
                 if(!theServerDataFile.exists()){
                     theServerDataFile.createNewFile();
                 }else{
 
                     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-                    InputStream inputStream = classLoader.getResourceAsStream(theServerDataFile.getAbsolutePath());
+                    InputStream inputStream = classLoader.getResourceAsStream("server.properties");
                     serverProperties.load(inputStream);
 
 
-                    LogMessage.logMessage("Your list contains saved servers. Enter the server name to connect", false);
+                    LogMessage.logMessage("Your list contains saved servers. Write the name of the server to connect. If you want to create a new connection instead of the server name, enter the command /new", false);
                     System.out.println();
 
                     Set<String>serverNamesList = serverProperties.stringPropertyNames();
@@ -71,6 +74,60 @@ public class MainClass {
                     System.out.println();
                     LogMessage.logMessage("Write a name server to connect : ", true);
                     String serverName = sc.nextLine();
+
+
+                    if(serverName.equals("/new")){
+
+
+                        LogMessage.logMessage("Write please a server IP : ", true);
+
+                        // Проверка IP на null и на пустое значение 
+                        while(true){
+
+                            ipServer = sc.nextLine();
+
+                            if(ipServer == null || ipServer.isEmpty()){
+                                LogMessage.logMessage("IP server is null or Empty . Please write a valid server IP : ", true);
+
+                            }else{
+
+                                break;
+                            }
+
+                        }
+
+                        LogMessage.logMessage("Write please a port server : ", true);
+                        while(true){
+                            portServer = sc.nextLine();
+
+                            try{
+
+                                Long i = Long.parseLong(portServer);  // Проверка. Является ли порт валидным значением , если нет то просят ввести повторно порт 
+
+                                if(portServer == null || portServer.isEmpty()){
+                                    LogMessage.logMessage("Server port is null or empty . Please write a valid port server : ", true);
+
+                                }else{
+                                    break;
+                                }
+
+
+
+                            }catch(NumberFormatException e){
+                                LogMessage.logMessage("Port server invalid , please write a port server again : ", true);
+                            }
+                            
+                        }
+
+
+
+
+
+
+
+
+
+                    }
 
                     String fullServerAdress = serverProperties.getProperty(serverName);
 
