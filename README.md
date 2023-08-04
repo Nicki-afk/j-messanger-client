@@ -7,12 +7,15 @@ This is a small program with which you can connect to a WebSocket message server
 <br>
 
 ---
-## Version note 0.0.4-alpha
+## Version note 0.0.5-alpha
 
-**In the new version 0.0.4-alpha, the following bugs have been fixed, and the following features have been added:**
+**In the new version 0.0.5-alpha, the following bugs have been fixed, and the following features have been added:**
 
- - The output of messages has been fixed, now the line break occurs by words and not by letters as it was before
- - Added the ability to disable message output character by character using the `/styleprint --off`  command. Also added the ability to change the speed of printing characters using the command `/charpm "time in milliseconds "`
+- Possible exceptions handled. Now if there is any problem or error, the user will see the corresponding message
+
+- Added the ability to save connection data to the server. Now when you restart the application, you will be prompted to enter the name of the already saved server to connect
+- Changed the speed of printing characters per millisecond. Characters now print faster
+- Slightly optimized code
 
 ---
 
@@ -30,7 +33,7 @@ Recommended system settings to run the application:
 And so, first of all, you should download the repository or clone it to your computer, after that you will get into the jar folder, unpack the archive where it is convenient for you, and run its accompanying command: 
 
 ```
-java -jar gyberwebsocket-client-0.0.4-alpha.jar
+java -jar gyberwebsocket-client-0.0.5-alpha.jar
 
 ```
 
