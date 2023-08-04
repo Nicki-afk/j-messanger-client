@@ -285,6 +285,8 @@ public class MainClass {
     }
 
 
+    // TODO : Сделать проверку на имя сервера. Сделать так что бы нельзя было сохранять имя сервера с тем же названием которое уже есть в файле
+    //        Сделать проверку на написание имини сервера. Сделать так что бы сохранять можно было названия такого типа name.server.server
     public void saveAServerData(String serverIp , String serverPort){
         try{
             Scanner sc = new Scanner(System.in);
@@ -327,6 +329,7 @@ public class MainClass {
                     int x = 0;
                     while(x < serverNames.size()){
                         writer.write(serverNames.get(x));
+                        writer.newLine();
                         x++;
                     }
 
