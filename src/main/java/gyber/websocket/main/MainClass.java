@@ -174,6 +174,7 @@ public class MainClass {
 
                         }
 
+                        saveAServerData(ipServer, portServer);
                         configAdnConnectToServer(ipServer, portServer);
 
                     }else{
