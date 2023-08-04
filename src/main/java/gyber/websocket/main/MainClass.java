@@ -104,20 +104,7 @@ public class MainClass {
 
                     }
 
-                    LogMessage.logMessage("IP Server to connect is { " + ipServer + " } port server is { " + portServer + "} . Strart to configure connection..."  , false);
-                    LogMessage.logMessage("Save a this connection data ? [Y/n]", true);
-
-                    String answer = sc.nextLine();
-                    if(answer.equals("Y")){
-
-                      LogMessage.logMessage("Write a name server to save : ", true);  
-                      String serverSaveName = sc.nextLine();
-                      saveAServerData(ipServer, portServer, serverSaveName);
-                    
-
-
-                    }
-
+                    saveAServerData(ipServer, portServer);
                     configAdnConnectToServer(ipServer, portServer);
 
 
@@ -321,6 +308,8 @@ public class MainClass {
 
                 }
 
+                
+
                 serverNames.add(
                     serverSaveName
                     .concat("=")
@@ -337,6 +326,7 @@ public class MainClass {
                     int x = 0;
                     while(x < serverNames.size()){
                         writer.write(serverNames.get(x));
+                        x++;
                     }
 
                 }
