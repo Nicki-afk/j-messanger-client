@@ -1,13 +1,20 @@
 package gyber.websocket.main;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
+
+import org.glassfish.grizzly.nio.transport.DefaultStreamReader.Input;
 
 import gyber.websocket.client.ClientEndpointClass;
 import gyber.websocket.client.LogMessage;
@@ -35,7 +42,62 @@ public class MainClass {
 
 
     public void preStart(){
+        Properties serverProperties = new Properties();
         Scanner sc = new Scanner(System.in);
+
+
+            try{
+                File theServerDataFile = new File("gyberwebsocket/src/main/resources/server.properties");
+
+                if(!theServerDataFile.exists()){
+                    theServerDataFile.createNewFile();
+                }else{
+
+                    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+                    InputStream inputStream = classLoader.getResourceAsStream(theServerDataFile.getAbsolutePath());
+                    serverProperties.load(inputStream);
+
+
+                    LogMessage.logMessage("Your list contains saved servers. Enter the server name to connect", false);
+                    System.out.println();
+
+                    Set<String>serverNamesList = serverProperties.stringPropertyNames();
+
+                    for(String i : serverNamesList){
+                        System.out.println("  * " + i);
+
+                    }
+
+                    System.out.println();
+                    LogMessage.logMessage("Write a name server to connect : ", true);
+                    String serverName = sc.nextLine();
+
+                    String fullServerAdress = serverProperties.getProperty(serverName);
+
+                    this.uriServer = URI.create(fullServerAdress);
+                    LogMessage.logMessage("Adress create successful ! Init a connection for " + fullServerAdress , false);
+                    System.out.println();
+
+                    ClientEndpointClass clientEndpointClass = new ClientEndpointClass();
+                    Session session = container.connectToServer(ClientEndpointClass.class , uriServer);
+                    session.setMaxIdleTimeout(120000);
+
+                    while(session.isOpen()){Thread.sleep(3000);}
+
+
+
+
+                
+                    
+
+
+                }
+
+
+            }catch(Exception e){
+                e.printStackTrace();
+
+            }
 
 
 
