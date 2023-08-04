@@ -100,6 +100,14 @@ public class MainClass {
                     }
 
                     LogMessage.logMessage("IP Server to connect is { " + ipServer + " } port server is { " + portServer + "} . Strart to configure connection..."  , false);
+                    LogMessage.logMessage("Save a this connection data ? [Y/n]", true);
+
+                    String answer = sc.nextLine();
+                    if(answer.equals("Y")){
+                        
+
+                    }
+
                     configAdnConnectToServer(ipServer, portServer);
 
 
