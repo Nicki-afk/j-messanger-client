@@ -1,9 +1,12 @@
 package gyber.websocket.main;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
@@ -104,7 +107,12 @@ public class MainClass {
 
                     String answer = sc.nextLine();
                     if(answer.equals("Y")){
-                        
+
+                      LogMessage.logMessage("Write a name server to save : ", true);  
+                      String serverSaveName = sc.nextLine();
+                      saveAServerData(ipServer, portServer, serverSaveName);
+                    
+
 
                     }
 
@@ -283,6 +291,32 @@ public class MainClass {
             LogMessage.logMessage("Error thread. The stream was interrupted by an unknown", false);
 
         }
+
+    }
+
+
+    public void saveAServerData(String serverName , String serverIp , String serverPort){
+        try{
+
+
+            File fileToWrite = new File("gyberwebsocket/src/main/resources/server.properties");
+            List<String>serverNames = new ArrayList<>();
+
+            try(BufferedReader reader = new BufferedReader(new FileReader(fileToWrite))){
+                String i = "";
+                while((i = reader.readLine()) != null){
+                    serverNames.add(i);
+                }
+
+            }
+            System.out.println("List : " + serverNames);
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 
