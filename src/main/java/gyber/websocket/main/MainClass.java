@@ -3,6 +3,7 @@ package gyber.websocket.main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -54,11 +55,12 @@ public class MainClass {
             try{
                 // TODO : Изменить путь к файлу и его место расположениe
                 String ipServer = "" , portServer = "";
-                String filePath = "gyberwebsocket/src/main/resources/server.properties";
+                String filePath = "props/server.properties";
                 File theServerDataFile = new File(filePath);
                 
 
                 if(!theServerDataFile.exists()){
+                    new File("props").mkdir();
                     theServerDataFile.createNewFile();
 
 
@@ -111,9 +113,12 @@ public class MainClass {
 
                 }else{
 
-                    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-                    InputStream inputStream = classLoader.getResourceAsStream("server.properties");
-                    serverProperties.load(inputStream);
+                    // ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+                    // InputStream inputStream = classLoader.getResourceAsStream("/server.properties");
+                    // serverProperties.load(inputStream);
+                    FileInputStream fileInputStream = new FileInputStream("props/server.properties");
+                    serverProperties.load(fileInputStream);
+                    fileInputStream.close();
 
 
                     LogMessage.logMessage("Your list contains saved servers. Write the name of the server to connect. If you want to create a new connection instead of the server name, enter the command /new", false);
@@ -300,7 +305,7 @@ public class MainClass {
                 LogMessage.logMessage("Write a name server to save : ", true);  
                 String serverSaveName = sc.nextLine();
 
-                File fileToWrite = new File("gyberwebsocket/src/main/resources/server.properties");
+                File fileToWrite = new File("props/server.properties");
                 List<String>serverNames = new ArrayList<>();
 
                 try(BufferedReader reader = new BufferedReader(new FileReader(fileToWrite))){
