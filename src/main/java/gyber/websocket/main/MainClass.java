@@ -113,9 +113,6 @@ public class MainClass {
 
                 }else{
 
-                    // ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-                    // InputStream inputStream = classLoader.getResourceAsStream("/server.properties");
-                    // serverProperties.load(inputStream);
                     FileInputStream fileInputStream = new FileInputStream("props/server.properties");
                     serverProperties.load(fileInputStream);
                     fileInputStream.close();
@@ -135,6 +132,13 @@ public class MainClass {
                     LogMessage.logMessage("Write a name server to connect : ", true);
                     String serverName = sc.nextLine();
 
+                    while(!serverNamesList.contains(serverName)){
+                        LogMessage.logMessage("Error . Name save server not found . Write server name again : ", true);
+                        serverName = sc.nextLine();
+
+                    }
+
+                
 
                     if(serverName.equals("/new")){
 
@@ -186,6 +190,7 @@ public class MainClass {
 
 
                         configAdnConnectToServer(serverProperties.getProperty(serverName));
+                    
                     }
 
 
