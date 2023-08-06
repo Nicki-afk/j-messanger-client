@@ -35,7 +35,7 @@ public class ClientConfigClass {
 
             try{
                 String ipServer = "" , portServer = "";
-                String filePath = "../props/server.properties";
+                String filePath = "props/server.properties";
                 File theServerDataFile = new File(filePath);
                 
 
@@ -93,7 +93,7 @@ public class ClientConfigClass {
 
                 }else{
 
-                    FileInputStream fileInputStream = new FileInputStream("../props/server.properties");
+                    FileInputStream fileInputStream = new FileInputStream("props/server.properties");
                     serverProperties.load(fileInputStream);
                     fileInputStream.close();
 
@@ -282,6 +282,7 @@ public class ClientConfigClass {
 
     // TODO : Сделать проверку на имя сервера. Сделать так что бы нельзя было сохранять имя сервера с тем же названием которое уже есть в файле
     public void saveAServerData(String serverIp , String serverPort){
+        
         try{
             Scanner sc = new Scanner(System.in);
 
@@ -289,7 +290,8 @@ public class ClientConfigClass {
             LogMessage.logMessage("Save a this connection data ? [Y/n]", true);
 
             String answer = sc.nextLine();
-            if(answer.equalsIgnoreCase(answer)){
+            
+            if(answer.trim().equalsIgnoreCase("y")){
 
                 LogMessage.logMessage("Write a name server to save : ", true);  
                 String serverSaveName = "";
@@ -313,7 +315,6 @@ public class ClientConfigClass {
                     
 
                 }
-                
 
                 File fileToWrite = new File("props/server.properties");
                 List<String>serverNames = new ArrayList<>();
@@ -355,6 +356,7 @@ public class ClientConfigClass {
 
 
             }else{
+                
                 return;
             }
 
