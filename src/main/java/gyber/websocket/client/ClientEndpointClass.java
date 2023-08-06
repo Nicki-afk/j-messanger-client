@@ -116,7 +116,6 @@ public class ClientEndpointClass {
     public void writeAMessage(){
         try{
 
-           // System.out.print(": ");
             String msg = new Scanner(System.in).nextLine();
         
 
@@ -131,26 +130,33 @@ public class ClientEndpointClass {
         
 
             }else if (msg.contains("/")){
-                String command = msg.substring(msg.indexOf('/'),  msg.indexOf(' '));
-                String args = msg.substring(msg.indexOf(' ')+1);
+                try{
+                    String command = msg.substring(msg.indexOf('/'),  msg.indexOf(' '));
+                    String args = msg.substring(msg.indexOf(' ')+1);
 
 
-                if(command.equals("/styleprint") && args.equals("--off")){
-                    LogMessage.STYLE_PRINT = false;
-                    LogMessage.logMessage("Text output changed successfully. Now the characters will not be printed character by character", false);
-                          
-                }else if(command.equals("/styleprint") && args.equals("--on")){
+                    if(command.equals("/styleprint") && args.equals("--off")){
+                        LogMessage.STYLE_PRINT = false;
+                        LogMessage.logMessage("Text output changed successfully. Now the characters will not be printed character by character", false);
+                            
+                    }else if(command.equals("/styleprint") && args.equals("--on")){
 
-                    LogMessage.logMessage("Text output changed successfully. Now the characters will be printed character by character. You can change the print speed using the /charpm command", false);
-                    LogMessage.STYLE_PRINT = true;
+                        LogMessage.logMessage("Text output changed successfully. Now the characters will be printed character by character. You can change the print speed using the /charpm command", false);
+                        LogMessage.STYLE_PRINT = true;
 
-                }else if(command.equals("/charpm")){
-                    LogMessage.CHAR_PER_MILLISECOND = Long.parseLong(args);
-                    LogMessage.logMessage("The command has been successfully applied. Characters will be printed once per " + args, false);
+                    }else if(command.equals("/charpm")){
+                        LogMessage.CHAR_PER_MILLISECOND = Long.parseLong(args);
+                        LogMessage.logMessage("The command has been successfully applied. Characters will be printed once per " + args, false);
 
-                }
+                    }else{
 
-                writeAMessage();
+                        LogMessage.logMessage("Error. this command incorrect or incorrect command args", false);
+
+                    }
+
+                    writeAMessage();
+
+                }catch(StringIndexOutOfBoundsException exception){ LogMessage.logMessage("Error. Command not found" , false); }
 
             }else{
 
