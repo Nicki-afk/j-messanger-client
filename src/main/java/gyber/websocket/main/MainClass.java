@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
@@ -132,11 +133,7 @@ public class MainClass {
                     LogMessage.logMessage("Write a name server to connect : ", true);
                     String serverName = sc.nextLine();
 
-                    while(!serverNamesList.contains(serverName)){
-                        LogMessage.logMessage("Error . Name save server not found . Write server name again : ", true);
-                        serverName = sc.nextLine();
-
-                    }
+                    
 
                 
 
@@ -183,10 +180,19 @@ public class MainClass {
 
                         }
 
+                    
+
+
                         saveAServerData(ipServer, portServer);
                         configAdnConnectToServer(ipServer, portServer);
 
                     }else{
+
+                        while(!serverNamesList.contains(serverName)){
+                            LogMessage.logMessage("Error . Name save server not found . Write server name again : ", true);
+                            serverName = sc.nextLine();
+
+                        }
 
 
                         configAdnConnectToServer(serverProperties.getProperty(serverName));
@@ -308,7 +314,28 @@ public class MainClass {
             if(answer.equalsIgnoreCase(answer)){
 
                 LogMessage.logMessage("Write a name server to save : ", true);  
-                String serverSaveName = sc.nextLine();
+                String serverSaveName = "";
+
+                // Проверка имени сервера
+                while(true){
+                    serverSaveName = sc.nextLine();
+                    
+                    if(serverSaveName == null || serverSaveName.isEmpty()){
+
+                        LogMessage.logMessage("Error. Server name is null or empty , write a name server in format 'name.server' : ", true);
+                    }else{
+
+                        if(Pattern.compile("[^a-zA-Z0-9\u0430-\u044F\u0410-\u042F\\\\.\\\\s]").matcher(serverSaveName).find()){
+                            LogMessage.logMessage("Error . Name server is invalid , write please name server in format 'name.server' : ", true);
+
+                        }else{
+                            break;
+                        }
+                    }
+                    
+
+                }
+                
 
                 File fileToWrite = new File("props/server.properties");
                 List<String>serverNames = new ArrayList<>();
