@@ -35,7 +35,7 @@ public class ClientConfigClass {
 
             try{
                 String ipServer = "" , portServer = "";
-                String filePath = "props/server.properties";
+                String filePath = "../props/server.properties";
                 File theServerDataFile = new File(filePath);
                 
 
@@ -93,7 +93,7 @@ public class ClientConfigClass {
 
                 }else{
 
-                    FileInputStream fileInputStream = new FileInputStream("props/server.properties");
+                    FileInputStream fileInputStream = new FileInputStream("../props/server.properties");
                     serverProperties.load(fileInputStream);
                     fileInputStream.close();
 
