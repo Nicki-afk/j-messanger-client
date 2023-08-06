@@ -15,6 +15,7 @@ This is a small program with which you can connect to a WebSocket message server
 
 - Added the ability to save connection data to the server. Now when you restart the application, you will be prompted to enter the name of the already saved server to connect
 - Changed the speed of printing characters per millisecond. Characters now print faster
+- Added executable scripts for different OS
 - Slightly optimized code
 
 ---
@@ -36,6 +37,17 @@ And so, first of all, you should download the repository or clone it to your com
 java -jar gyberwebsocket-client-0.0.5-alpha.jar
 
 ```
+
+You can also use an executable script. If you are on Linux run the following commands:
+
+```
+cd jar/
+chmod +x start.sh
+
+```
+After that you can right click on the script and select (Run as Application)
+
+If you are on Windows you can simply double click on the `start.bat` file and the application will run in a separate console window
 
 If everything worked out for you, then when you start the program, you should see the following message
 
