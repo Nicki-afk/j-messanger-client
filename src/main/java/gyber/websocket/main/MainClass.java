@@ -1,5 +1,4 @@
 package gyber.websocket.main;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +13,10 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
-
-import org.glassfish.grizzly.nio.transport.DefaultStreamReader.Input;
 
 import gyber.websocket.client.ClientEndpointClass;
 import gyber.websocket.client.LogMessage;
@@ -54,7 +49,6 @@ public class MainClass {
 
 
             try{
-                // TODO : Изменить путь к файлу и его место расположениe
                 String ipServer = "" , portServer = "";
                 String filePath = "props/server.properties";
                 File theServerDataFile = new File(filePath);
