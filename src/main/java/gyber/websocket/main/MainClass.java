@@ -10,11 +10,11 @@ public class MainClass {
 
         try {       
           
-        
+            System.out.println();
 
-         ClientConfigClass clientConfigClass = new ClientConfigClass();
-         clientConfigClass.preStart();
-            
+            ClientConfigClass clientConfigClass = new ClientConfigClass();
+            clientConfigClass.preStart();
+
         } catch (Exception e) {
             
             e.printStackTrace();
